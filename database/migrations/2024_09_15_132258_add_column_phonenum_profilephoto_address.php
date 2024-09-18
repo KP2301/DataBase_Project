@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->unsignedBigInteger('phone_number')->nullable();
+            $table->string('phone_number',10)->after('email')->nullable();
             $table->string('profile_photo')->nullable();
-            $table->string('address')->nullable();
+            $table->string('address',255)->after('phone_number')->nullable();
         });
     }
 
