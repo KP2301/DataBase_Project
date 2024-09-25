@@ -6,14 +6,31 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <div class="logo">BAOBAO</div>
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
+                <style>
+                    .logo {
+                        font-family: 'Times New Roman', serif; /* You can still change the font if needed */
+                        font-size: 24px; /* 50% of the original size (48px -> 24px) */
+                        letter-spacing: 5px; /* Keep letter spacing */
+                        font-weight: bold;
+                        color: white; /* Set text color to white */
+                    }
+                </style>
+                
+                <!-- Dashboard Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                </div>
+
+                <!-- Product Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('product.display_product')" :active="request()->routeIs('product.display_product')">
+                        {{ __('Product') }}
                     </x-nav-link>
                 </div>
             </div>
