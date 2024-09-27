@@ -36,6 +36,20 @@
                                                     {{ __('Member Information') }}
                                                 </x-nav-link>
                                             </div>
+
+                                            <!-- Cart Links -->
+                                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                                <x-nav-link :href="route('cart.display_cart')" :active="request()->routeIs('cart.display_cart')">
+                                                    {{ __('Cart') }}
+                                                </x-nav-link>
+                                            </div>
+
+                                            <!-- Summary Links -->
+                                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                                <x-nav-link :href="route('summary.display_summary')" :active="request()->routeIs('summary.display_summary')">
+                                                    {{ __('Summary') }}
+                                                </x-nav-link>
+                                            </div>
                                         
                                     @else
                                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
