@@ -18,6 +18,7 @@ class Products extends Model
         'description',
         'categoryID',
         'cartID',
+        'product_photo',
     ];
 
     protected $casts = [

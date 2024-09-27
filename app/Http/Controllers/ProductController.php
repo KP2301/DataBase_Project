@@ -12,6 +12,6 @@ class ProductController extends Controller
     public function display_product()
     {
         $userId = Auth::id(); // Get the authenticated user's ID
-        return view('product.display_product');
+        return view("display_product");
     }
 }

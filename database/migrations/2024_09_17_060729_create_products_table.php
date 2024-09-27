@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("description")->nullable();
             $table->unsignedBigInteger('categoryID')->nullable();
             $table->unsignedBigInteger('cartID')->nullable();
+            $table->string('product_photo')->nullable();
             $table->timestamps();
         });
     }

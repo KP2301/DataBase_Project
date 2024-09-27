@@ -32,5 +32,10 @@
                 {{ $slot }}
             </main>
         </div>
+        <style>
+            body {
+                height: 100vh; /* Set height to full viewport height */
+            }
+        </style>
     </body>
 </html>
