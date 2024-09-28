@@ -4,29 +4,23 @@
             {{ __('PRODUCTS') }}
         </h2>
     </x-slot>
-    
-    <div class="flex flex-wrap justify-between m-6 text-black">
-        <div class="card">
-            <img src="{{ asset('pictures/demo-shirt1.jpg') }}" alt="Image 1"> 
-            <h5 class="text-xl font-bold">เบาที่สบาย</h5> 
-            <p>bao T-Sabai</p>
+    <div class="p-5">
+        <div class="flex flex-wrap justify-around m-6 text-black">
+            @foreach($products as $product)
+                <div class="card">
+                    <img src="{{ asset($product->product_photo) }}" alt="{{ $product->name }}"> 
+                    <h5 class="text-xl font-bold">{{ $product->name }}</h5> 
+                    <p>{{ $product->description }}</p>
+                    <p>Price: ${{ $product->price }}</p>
+                    <p>Remaining: {{ $product->remainProduct }}</p>
+                </div>
+            @endforeach
         </div>
-        <div class="card">
-            <img src="{{ asset('pictures/demo-shirt2.jpg') }}" alt="Image 1"> 
-            <h5 class="text-xl font-bold">เบาที่สบาย</h5> 
-            <p>bao T-Sabai</p>
-        </div>
-        <div class="card">
-            <img src="{{ asset('pictures/demo-shirt3.jpg') }}" alt="Image 1"> 
-            <h5 class="text-xl font-bold">เบาที่สบาย</h5> 
-            <p>bao T-Sabai</p>
-        </div>
-        <div class="card">
-            <img src="{{ asset('pictures/demo-shirt1.jpg') }}" alt="Image 1"> 
-            <h5 class="text-xl font-bold">เบาที่สบาย</h5> 
-            <p>bao T-Sabai</p>
+        <div>
+            {{ $products->links('pagination::tailwind') }}
         </div>
     </div>
+    
 </x-app-layout>
 
 <style>
@@ -38,8 +32,8 @@
         border: 1px solid #ddd; /* Light gray border */
         border-radius: 8px; /* Rounded corners */
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-        padding: 16px; /* Inner padding */
-        margin-bottom: 20px; /* Space between rows */
+        padding: 12px; /* ลด Inner padding */
+        margin-bottom: 15px; /* ลด Space between rows */
         transition: transform 0.3s; /* Smooth transition for hover effect */
         display: flex; /* Enable flexbox for card content */
         flex-direction: column; /* Stack children vertically */
@@ -47,7 +41,7 @@
         justify-content: center; /* Center children vertically */
         text-align: center; /* Center text */
     }
-    
+
     .card img {
         width: 100%; /* Responsive image */
         height: 300px; /* Maintain aspect ratio */
