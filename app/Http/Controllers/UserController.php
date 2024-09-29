@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
-{
+{    
     public function updateProfilePhoto(Request $request)
     {
         $request->validate([
