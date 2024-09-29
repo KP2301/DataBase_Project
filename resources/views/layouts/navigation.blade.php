@@ -12,13 +12,28 @@
 
                 <style>
                     .logo {
-                        font-family: 'Times New Roman', serif; /* You can still change the font if needed */
-                        font-size: 24px; /* 50% of the original size (48px -> 24px) */
-                        letter-spacing: 5px; /* Keep letter spacing */
+                        font-family: 'Times New Roman', serif;
+                        font-size: 24px;
+                        letter-spacing: 5px;
                         font-weight: bold;
-                        color: white; /* Set text color to white */
+                        transition: color 0.3s ease; /* Smooth transition for color change */
+                    }
+
+                    /* Light mode styles */
+                    @media (prefers-color-scheme: light) {
+                        .logo {
+                            color: black; /* Dark text for light mode */
+                        }
+                    }
+
+                    /* Dark mode styles */
+                    @media (prefers-color-scheme: dark) {
+                        .logo {
+                            color: white; /* White text for dark mode */
+                        }
                     }
                 </style>
+
 
                             @if (Route::has('login'))
                                     <nav class="flex space-x-4">
