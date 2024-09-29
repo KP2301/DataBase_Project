@@ -61,6 +61,7 @@
         height: 300px;
         border-radius: 8px 8px 0 0;
         margin-bottom: 8px;
+        object-fit:cover;
     }
 
     .card:hover {
