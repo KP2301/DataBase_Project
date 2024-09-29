@@ -18,3 +18,10 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
+
+vendor/pest-plugins.json
+package-lock.json
+vendor/composer/installed.php
+vendor/composer/autoload_static.php
+vendor/composer/autoload_psr4.php
+vendor/composer/autoload_classmap.php
