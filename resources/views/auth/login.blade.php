@@ -39,6 +39,16 @@
                 </a>
             @endif
 
+            @if (Route::has('register'))
+            <x-primary-button class="ms-3">
+                <a
+                    href="{{ route('register') }}"
+                >
+                    Register
+                </a>
+                </x-primary-button>
+            @endif
+
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
