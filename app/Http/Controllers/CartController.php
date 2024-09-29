@@ -29,17 +29,28 @@ class CartController extends Controller
             return back()->with('error', 'Product not found.');
         }
 
-        // Create or update the cart item
-        Cart::updateOrCreate(
-            [
+        if ($products->remainProduct < $request->totalAmount) {
+            return back()->with('error', 'Not enough products available.');
+        }
+
+        $existingCartItem = Cart::where('customerID', Auth::id())
+                            ->where('productID', $products->id)
+                            ->first();
+
+        if ($existingCartItem) {
+            // If it exists, increment the total amount and update the total price
+            $existingCartItem->totalAmount += $request->totalAmount;
+            $existingCartItem->totalPrice += $products->price * $request->totalAmount;
+            $existingCartItem->save();
+        } else {
+            // If it doesn't exist, create a new cart item
+            Cart::create([
                 'customerID' => Auth::id(),
                 'productID' => $products->id,
-            ],
-            [
                 'totalAmount' => $request->totalAmount,
                 'totalPrice' => $products->price * $request->totalAmount,
-            ]
-        );
+            ]);
+        }
 
         $products->remainProduct -= $request->totalAmount;
         $products->save();
