@@ -7,7 +7,7 @@
     <div class="p-5">
         <div class="flex flex-wrap justify-around m-6 text-black">
             @if ($products->isEmpty())
-            <p class="text-white">No diary product found.</p>
+            <p class="text-white">No product found.</p>
             @else
             @foreach($products as $product)
                 <div class="card">
