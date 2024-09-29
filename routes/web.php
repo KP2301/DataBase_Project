@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
 Route::post('/profile/photo/update', [UserController::class, 'updateProfilePhoto'])->name('profile.photo.update');
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add.to.cart');
 
 Route::get('/display_product', [ProductController::class, 'display_product'])->name('display_product');
 

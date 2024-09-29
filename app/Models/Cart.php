@@ -15,6 +15,11 @@ class Cart extends Model
         'productID',
     ];
 
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'productID', 'id'); // Adjust the foreign key as needed
+    }
+
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

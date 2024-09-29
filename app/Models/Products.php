@@ -21,6 +21,11 @@ class Products extends Model
         'product_photo',
     ];
 
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class, 'id', 'productID'); // Adjust the foreign key as needed
+    }
+
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

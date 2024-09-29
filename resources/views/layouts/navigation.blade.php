@@ -33,55 +33,53 @@
                         }
                     }
                 </style>
+                @if (Route::has('login'))
+                        <nav class="flex space-x-4">
+                        @auth
+                                <!-- Product Links -->
+                                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                    <x-nav-link :href="route('display_product')" :active="request()->routeIs('display_product')">
+                                        {{ __('Product') }}
+                                    </x-nav-link>
+                                </div>
+                                
+                                <!-- Dashboard Links -->
+                                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                                        {{ __('Member Information') }}
+                                    </x-nav-link>
+                                </div>
 
+                                <!-- Cart Links -->
+                                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                    <x-nav-link :href="route('cart.display_cart')" :active="request()->routeIs('cart.display_cart')">
+                                        {{ __('Cart') }}
+                                    </x-nav-link>
+                                </div>
 
-                            @if (Route::has('login'))
-                                    <nav class="flex space-x-4">
-                                    @auth
-                                            <!-- Product Links -->
-                                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                                <x-nav-link :href="route('display_product')" :active="request()->routeIs('display_product')">
-                                                    {{ __('Product') }}
-                                                </x-nav-link>
-                                            </div>
-                                            
-                                            <!-- Dashboard Links -->
-                                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                                                    {{ __('Member Information') }}
-                                                </x-nav-link>
-                                            </div>
-
-                                            <!-- Cart Links -->
-                                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                                <x-nav-link :href="route('cart.display_cart')" :active="request()->routeIs('cart.display_cart')">
-                                                    {{ __('Cart') }}
-                                                </x-nav-link>
-                                            </div>
-
-                                            <!-- Summary Links -->
-                                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                                <x-nav-link :href="route('summary.display_summary')" :active="request()->routeIs('summary.display_summary')">
-                                                    {{ __('Summary') }}
-                                                </x-nav-link>
-                                            </div>
-                                        
-                                    @else
-                                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                            <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
-                                                {{ __('Log in') }}
-                                            </x-nav-link>
-                                        </div>
-                                        @if (Route::has('register'))
-                                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                            <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                                                {{ __('Register') }}
-                                            </x-nav-link>
-                                        </div>
-                                        @endif
-                                    @endauth
-                                </nav>
-                            @endif  
+                                <!-- Summary Links -->
+                                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                    <x-nav-link :href="route('summary.display_summary')" :active="request()->routeIs('summary.display_summary')">
+                                        {{ __('Summary') }}
+                                    </x-nav-link>
+                                </div>
+                            
+                        @else
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                                    {{ __('Log in') }}
+                                </x-nav-link>
+                            </div>
+                            @if (Route::has('register'))
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                                    {{ __('Register') }}
+                                </x-nav-link>
+                            </div>
+                            @endif
+                        @endauth
+                    </nav>
+                @endif  
             </div>
             
             <!-- Settings Dropdown -->
