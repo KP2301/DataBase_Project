@@ -42,18 +42,15 @@ class CartController extends Controller
             $existingCartItem->totalAmount += $request->totalAmount;
             $existingCartItem->totalPrice += $products->price * $request->totalAmount;
             $existingCartItem->save();
-            $cartID = $existingCartItem->id;
         } else {
             // If it doesn't exist, create a new cart item
-            $newCartItem = Cart::create([
+            Cart::create([
                 'customerID' => Auth::id(),
                 'productID' => $products->id,
                 'totalAmount' => $request->totalAmount,
                 'totalPrice' => $products->price * $request->totalAmount,
             ]);
-            $cartID = $newCartItem->id;
         }
-        $products->cartID = $cartID;
         $products->remainProduct -= $request->totalAmount;
         $products->save();
 

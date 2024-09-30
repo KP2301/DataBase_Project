@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->foreign('categoryID')->references('id')->on('categories')->onDelete('set null');
-            $table->foreign('cartID')->references('id')->on('carts')->onDelete('set null');
+            // $table->foreign('cartID')->references('id')->on('carts')->onDelete('set null');
         });
 
         Schema::table('carts', function (Blueprint $table) {
