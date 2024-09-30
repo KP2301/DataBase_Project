@@ -40,7 +40,7 @@
                         <form action="{{ route('add.to.cart') }}" method="POST">
                             @csrf
                             <input type="hidden" name="productID" value="{{ $product->id }}">
-                            <input type="number" name="totalAmount" value="1" min="1" required>
+                            <input type="number" name="totalAmount" value="0" min="0" required>
                             <button type="submit">
                                 Add to Cart
                             </button>
