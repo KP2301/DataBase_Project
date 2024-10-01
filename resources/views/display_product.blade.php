@@ -25,6 +25,7 @@
                 </span>
             </div>
         @endif
+        
         <div class="flex flex-wrap justify-around m-6 text-black">
             @if ($products->isEmpty())
             <p class="text-white">No product found.</p>
