@@ -37,6 +37,7 @@
                     <p>{{ $product->description }}</p>
                     <p>Price: ${{ $product->price }}</p>
                     <p>Remaining: {{ $product->remainProduct }}</p>
+                    <p>Rating: {{ $product->Rate_star }}</p>
                     @auth
                         <form action="{{ route('addToCart') }}" method="POST">
                             @csrf

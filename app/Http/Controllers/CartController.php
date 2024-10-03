@@ -17,27 +17,13 @@ class CartController extends Controller
         
          // Retrieve cart items for the authenticated user
          $cartItems = Cart::where('customerID', $userId)->get();
+
+         $products = DB::table('carts')
+         ->join('products','products.id','=','carts.productID')
+         ->where('customerID',$userId)
+         ->get();
          
-         // Initialize variables for calculation
-         $products = [];
          $subtotal = $cartItems->sum('totalPrice');
- 
-         // Loop through cart items and retrieve product details
-         foreach ($cartItems as $item) {
-             $product = Products::find($item->product_id);
-             
-             if ($product) {
-                 $products[] = [
-                     'name' => $product->name, 
-                     'price' => $product->price ?? 0, // Fallback value for price
-                     'quantity' => $item->totalAmount,
-                     'totalPrice' => $item->totalPrice
-                 ];
-             } else {
-                 // Handle missing product case
-                 continue;
-             }
-         }
          
          // Set shipping cost
          $shipping = $cartItems->isEmpty() ? 0 : 10; 
@@ -46,7 +32,7 @@ class CartController extends Controller
          $total = $subtotal + $shipping;
  
          // Pass the data to the view
-         return view('cart.display_cart', compact('products', 'subtotal', 'shipping', 'total'));
+         return view('cart.display_cart', compact('subtotal', 'shipping', 'total','products'));
     }
 
     public function addToCart(Request $request)
@@ -96,7 +82,7 @@ class CartController extends Controller
         $userId = Auth::id();
         $cartItems = Cart::where('customerID', $userId)->get();
         $request->validate([
-            'terms' => 'required|accepted', // This will ensure the checkbox is checked
+            'terms' => 'required|accepted', // ensure the checkbox is checked
         ]);
 
         if ($cartItems->isEmpty()) {

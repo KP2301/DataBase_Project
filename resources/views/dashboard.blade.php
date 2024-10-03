@@ -47,8 +47,13 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                 <div class="container ">
-                    <h2>{{ __("CONTACT INFO") }}</h2>
-                        <img src="{{ $user->profile_photo }}"  class="profile-photo">
+                    <h1 class='text-black'>{{ __("CONTACT INFO") }}</h1>
+                    @if(empty($user->profile_photo))
+                        <p class="text-black text-center">Don't have user's photo.</p>
+                    @else
+                        <img src="{{ asset($user->profile_photo) }}" class="profile-photo" alt="User's profile photo">
+                    @endif
+
                     <div  class="info-text">
                         <p> {{"Full Name  : "}}  {{($user->name) }} </p>
                         <p> {{"Email : "}} {{($user->email)}} </p>
@@ -57,7 +62,7 @@
                 </div>
                     
                 <div class="container">
-                    {{ __("Shipping Address") }}
+                    <h1 class='text-black'>{{ __("Shipping Address") }}</h1>
                     <div  class="info-text">
                         <p> {{"Address  : "}}  {{($user -> address) }} </p>    
                 </div>

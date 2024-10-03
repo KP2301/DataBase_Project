@@ -13,7 +13,7 @@ Route::get('/display_product', [ProductController::class, 'display_product'])->n
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('/');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
