@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/display_cart', [CartController::class, 'display_cart'])->name('cart.display_cart');
     Route::get('/display_summary', [SummaryController::class, 'display_summary'])->name('summary.display_summary');
 //   Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart');
-    Route::get('/cart', [CartController::class, 'updateCon'])->name('cart.updateCon');
+    Route::post('/cart', [CartController::class, 'updateCon'])->name('cart.updateCon');
 
 });
 
