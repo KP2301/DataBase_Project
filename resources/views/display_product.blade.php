@@ -38,7 +38,7 @@
                     <p>Price: ${{ $product->price }}</p>
                     <p>Remaining: {{ $product->remainProduct }}</p>
                     @auth
-                        <form action="{{ route('add.to.cart') }}" method="POST">
+                        <form action="{{ route('addToCart') }}" method="POST">
                             @csrf
                             <input type="hidden" name="productID" value="{{ $product->id }}">
                             <input type="number" name="totalAmount" value="0" min="0" required>

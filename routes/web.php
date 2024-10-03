@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
 Route::post('/profile/photo/update', [UserController::class, 'updateProfilePhoto'])->name('profile.photo.update');
-Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add.to.cart');
 
 Route::get('/display_product', [ProductController::class, 'display_product'])->name('display_product');
 
@@ -26,7 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/display_cart', [CartController::class, 'display_cart'])->name('cart.display_cart');
     Route::get('/display_summary', [SummaryController::class, 'display_summary'])->name('summary.display_summary');
-//   Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart');
+    Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart');
     Route::post('/cart', [CartController::class, 'updateCon'])->name('cart.updateCon');
 
 });
