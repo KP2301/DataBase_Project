@@ -39,6 +39,8 @@ class SummaryController extends Controller
             Orders::create([
                 'customerID' => $userId,
                 'productID' => $cartItem->productID,
+                'quantity' => $cartItem->totalAmount,
+                'totalPrice' => $cartItem->totalPrice,
                 'date_time' => Carbon::now(),
             ]);
         }

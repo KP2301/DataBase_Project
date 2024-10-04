@@ -13,6 +13,8 @@ class Orders extends Model
         'date_time',
         'customerID',
         'productID',
+        'quantity',
+        'totalPrice',
     ];
 
     protected $casts = [

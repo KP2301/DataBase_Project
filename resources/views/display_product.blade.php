@@ -28,32 +28,108 @@
         
         <div class="flex flex-wrap justify-around m-6 text-black">
             @if ($products->isEmpty())
-            <p class="text-white">No product found.</p>
+                <p class="text-white">No product found.</p>
             @else
-            @foreach($products as $product)
-                <div class="card">
-                    <img src="{{ asset($product->product_photo) }}" alt="{{ $product->name }}"> 
-                    <h5 class="text-xl font-bold">{{ $product->name }}</h5> 
-                    <p>{{ $product->description }}</p>
-                    <p>Price: ${{ $product->price }}</p>
-                    <p>Remaining: {{ $product->remainProduct }}</p>
-                    <p>Rating: {{ $product->Rate_star }}</p>
-                    @auth
-                        <form action="{{ route('addToCart') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="productID" value="{{ $product->id }}">
-                            <input type="number" name="totalAmount" value="0" min="0" required>
-                            <button type="submit">
-                                Add to Cart
-                            </button>
-                        </form>
-                    @else
-                        <p class="text-red-500">Please log in to add products to your cart.</p>
-                    @endauth
-                </div>
-            @endforeach
+                @foreach($products as $product)
+                    <div class="card">
+                        <img src="{{ asset($product->product_photo) }}" alt="{{ $product->name }}"> 
+                        <div class="p-4">
+                            <h2 class="text-lg font-semibold">{{ $product->name }}</h2>
+                            <p class="text-gray-700">${{ number_format($product->price, 2) }}</p>
+                            
+                            @auth
+                                <p class="text-gray-500">Remaining Stock: {{ $product->remainProduct }}</p> 
+                                <!-- Details Button -->
+                                <button class="mt-2 text-white-500 hover:underline" onclick="openModal('{{ $product->id }}', '{{ $product->name }}', '{{ $product->description }}', '{{ number_format($product->price, 2) }}', '{{ $product->remainProduct }}')">
+                                    View Details
+                                </button>
+                            @else
+                                <p id="product-description-{{ $product->id }}" class="hidden">{{ $product->description }}</p>
+                                <p><span id="read-more-{{ $product->id }}" class="mt-2 text-brown-500 cursor-pointer" onclick="toggleDescription({{ $product->id }})">
+                                    Read More
+                                </span></p>
+                                <button class="mt-2 bg-brown-500 text-white py-2 px-4 rounded" 
+                                onclick="location.href='{{ route('login') }}'">
+                                    Buy
+                                </button>
+                            @endauth
+                        </div>
+                    </div>
+                @endforeach
             @endif
         </div>
+        <!-- Modal Structure -->
+        <div id="productModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden z-50 justify-center items-center" aria-hidden="true">
+            <div class="bg-white rounded-lg p-6 max-w-md mx-auto">
+                <h2 class="text-lg font-semibold" id="modalProductName"></h2>
+                <p id="modalProductDescription"></p>
+                <p class="mt-2" id="modalProductPrice"></p>
+                <p class="mt-2" id="modalProductStock"></p>
+                <form id="modalAddToCartForm" action="{{ route('addToCart') }}" method="POST" class="mt-4" onsubmit="return validateStock()">
+                    @csrf
+                    <input type="hidden" name="productID" id="modalProductID">
+                    <input type="number" name="totalAmount" id="modalTotalAmount" value="1" min="1" required class="border rounded-md p-1 w-full mt-2">
+                    <button type="submit" class="mt-2 bg-blue-500 text-white py-2 px-4 rounded w-full">
+                        Add to Cart
+                    </button>
+                </form>
+                <button class="mt-4 bg-red-500 text-white py-2 px-4 rounded" onclick="closeModal()">
+                    Close
+                </button>
+            </div>
+        </div>
+
+        <script>
+            function openModal(productId, name, description, price, stock) {
+                document.getElementById('modalProductName').innerText = name;
+                document.getElementById('modalProductDescription').innerText = description;
+                document.getElementById('modalProductPrice').innerText = `$${price}`;
+                document.getElementById('modalProductStock').innerText = `Remaining Stock: ${stock}`;
+                document.getElementById('modalProductID').value = productId; 
+                document.getElementById('productModal').classList.remove('hidden');
+                document.getElementById('productModal').setAttribute('aria-hidden', 'false');
+                document.getElementById('modalTotalAmount').value = 1; 
+                document.getElementById('modalTotalAmount').focus();
+            }
+
+            function closeModal() {
+                document.getElementById('productModal').classList.add('hidden');
+                document.getElementById('productModal').setAttribute('aria-hidden', 'true');
+            }
+
+            function validateStock() {
+                const stock = parseInt(document.getElementById('modalProductStock').innerText.match(/\d+/)[0]);
+                const amount = parseInt(document.getElementById('modalTotalAmount').value);
+                
+                if (amount > stock) {
+                    alert(`You cannot add more than ${stock} items to your cart.`);
+                    return false; // Prevent form submission
+                }
+                return true; // Allow form submission
+            }
+
+            function toggleDescription(productId) {
+                const description = document.getElementById('product-description-' + productId);
+                const link = document.getElementById('read-more-' + productId);
+                
+                // Toggle the visibility of the description
+                if (description.classList.contains('hidden')) {
+                    description.classList.remove('hidden');
+                    link.textContent = 'Read Less';
+                } else {
+                    description.classList.add('hidden');
+                    link.textContent = 'Read More';
+                }
+            }
+
+            // Close modal on Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        </script>
+
         <div>
             {{ $products->links('pagination::tailwind') }}
         </div>
@@ -61,8 +137,9 @@
 </x-app-layout>
 
 <style>
+
     .card {
-        width: calc(23.333% - 10px);
+        width: calc(22.333% - 10px);
         height: auto;
         background-color: #ffffff;
         border: 1px solid #ddd;
@@ -81,8 +158,8 @@
     .card img {
         width: 100%;
         height: 300px;
-        border-radius: 8px 8px 0 0;
-        margin-bottom: 8px;
+        border-radius: 8px;
+        margin-bottom: 4px;
         object-fit:cover;
     }
 
