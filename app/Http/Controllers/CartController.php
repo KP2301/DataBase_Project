@@ -76,22 +76,38 @@ class CartController extends Controller
         return back()->with('success', 'Product added to cart successfully!');
     }
 
-    public function updateCon(Request $request)
+    public function deleteFromCart(Request $request)
     {
-        // Check if there are any items in the cart
-        $userId = Auth::id();
-        $cartItems = Cart::where('customerID', $userId)->get();
-        $request->validate([
-            'terms' => 'required|accepted', // ensure the checkbox is checked
-        ]);
+        $userId = Auth::id(); // Get the authenticated user's ID
 
-        if ($cartItems->isEmpty()) {
-            return back()->with('error', 'Your order is empty!');
+        // Retrieve the cart item that is going to be deleted
+        $cartItem = Cart::where('customerID', $userId)
+            ->where('productID', $request->productID)
+            ->first();
+
+        // If the cart item exists, proceed
+        if ($cartItem) {
+            // Validate the requested quantity to delete
+            $quantityToDelete = min($request->quantity, $cartItem->totalAmount); // Ensure we don't delete more than exists
+
+            // Update the product's quantity in the products table by increasing it
+            $product = Products::find($cartItem->productID);
+            $product->increment('remainProduct', $quantityToDelete); // Increase the stock by the quantity to delete
+
+            // Update the cart: if the cart has more than the deleted quantity, reduce it
+            if ($cartItem->totalAmount > $quantityToDelete) {
+                $cartItem->decrement('totalAmount', $quantityToDelete); // Reduce cart quantity
+                $cartItem->totalPrice -= $product->price * $quantityToDelete; // Update the total price
+                $cartItem->save();
+            } else {
+                // Otherwise, delete the cart item if we're deleting all of it
+                $cartItem->delete();
+            }
         }
-    
-        // You can add payment processing logic here, if needed.
-    
-        // Assuming the order is successfully submitted
-        return back()->with('success', 'Your order has been submitted successfully!');
+
+        return back()->with('success', 'Item(s) deleted from cart and product stock updated successfully!');
     }
+
+
+
 }

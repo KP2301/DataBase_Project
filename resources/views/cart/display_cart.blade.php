@@ -52,7 +52,7 @@
                             <h3 class="summary-heading text-lg font-bold mb-4">{{ __('Cart Summary') }}</h3>
 
                             @foreach ($products as $product)
-                                <div class="max-w-ms w-full lg:max-w-full lg:flex mb-4 border rounded-lg shadow-md p-4">
+                                <div class="w-auto lg:flex mb-4 mr-4 border-4 border-black rounded-lg shadow-md p-4 bg-white">
                                     <!-- Product Image -->
                                     <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover text-center overflow-hidden">
                                         <img src="{{ $product->product_photo }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
@@ -60,15 +60,27 @@
                                     
                                     <!-- Product Info -->
                                     <div class="ml-4 flex flex-col justify-between leading-normal">
-                                        <div class="mb-2">
-                                            <p class="text-gray-900 font-bold text-xl">{{ $product->name }}</p>
-                                            <p class="text-gray-600">{{ __('Quantity:') }} {{ $product->totalAmount }}</p> <!-- Assuming quantity from pivot -->
-                                            <p class="text-gray-600">{{ __('Price:') }} ${{ $product->price }}</p>
-                                        </div>
-                                        <div>
-                                            <a href="#" class="text-blue-500 hover:underline">{{ __('Change') }}</a>
-                                        </div>
+                                    <div class="mb-2">
+                                        <p class="text-gray-900 font-bold text-xl">{{ $product->name }}</p>
+                                        <p class="text-gray-600">{{ __('Quantity:') }} {{ $product->totalAmount }}</p> 
+                                        <p class="text-gray-600">{{ __('Price:') }} ${{ $product->price }}</p>
                                     </div>
+                                    <form method="POST" action="{{ route('deleteFromCart') }}">
+                                        @csrf
+                                        <!-- Hidden input to pass productID to the delete method -->
+                                        <input type="hidden" name="productID" value="{{ $product->id }}">
+                                        
+                                        <!-- Input to specify quantity to delete -->
+                                        <label for="quantity">{{ __('Quantity to delete:') }}</label>
+                                        <input type="number" name="quantity" value="1" min="1" max="{{ $product->totalAmount }}" class="text-black">
+
+                                        <!-- Delete button -->
+                                        <button type="submit" class="text-blue-500 hover:underline">
+                                            {{ __('Delete') }}
+                                        </button>
+                                    </form>
+
+                                </div>
 
                                 </div>
                             @endforeach
@@ -90,11 +102,11 @@
                                     <span>${{ $total }}</span>
                                 </div>                                    
                         <!-- Terms and Conditions -->
-                        <form method="POST" action="{{ route('cart.updateCon') }}">
+                        <form method="POST" action="{{ route('addToOrders') }}">
                             @csrf
                             <label class="flex items-center">
                                 <input type="checkbox" name="terms" class="form-checkbox">
-                                <span class="ml-2  text-black dark:text-black ">{{ __('I agree to the terms and conditions') }}</span>    
+                                <span class="ml-2 text-black dark:text-black ">{{ __('I agree to the terms and conditions') }}</span>    
                             </label>
 
                             <!-- Continue Button -->
