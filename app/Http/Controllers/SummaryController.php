@@ -17,7 +17,11 @@ class SummaryController extends Controller
     {
         // Get the authenticated user's ID
         $userId = Auth::id();
-        return view('summary.display_summary');
+        $Items = DB::table('orders')
+        ->join('products','products.id','=','orders.productID')
+        ->where('customerID',$userId)
+        ->get();
+        return view('summary.display_summary',compact('Items'));
     }
 
     public function addToOrders(Request $request)
@@ -34,19 +38,19 @@ class SummaryController extends Controller
             ->where('customerID', $userId)
             ->get();
     
-        // Loop through each cart item and create an order
-        foreach ($cartItems as $cartItem) {
-            Orders::create([
-                'customerID' => $userId,
-                'productID' => $cartItem->productID,
-                'quantity' => $cartItem->totalAmount,
-                'totalPrice' => $cartItem->totalPrice,
-                'date_time' => Carbon::now(),
-            ]);
-        }
-
-        DB::table('carts')->where('customerID', $userId)->delete();
-    
+        DB::transaction(function () use ($cartItems, $userId) {
+            foreach ($cartItems as $cartItem) {
+                Orders::create([
+                    'customerID' => $userId,
+                    'productID' => $cartItem->productID,
+                    'quantity' => $cartItem->totalAmount,
+                    'totalPrice' => $cartItem->totalPrice,
+                    'date_time' => Carbon::now(),
+                ]);
+            }
+            DB::table('carts')->where('customerID', $userId)->delete();
+        });
+        
         return back()->with('success', 'Cart items added to orders successfully!');
     }
     
