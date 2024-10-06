@@ -12,10 +12,13 @@ class Orders extends Model
     protected $fillable = [
         'date_time',
         'customerID',
-        'productID',
-        'quantity',
-        'totalPrice',
     ];
+
+    public function products()
+    {
+        return $this->belongsToMany(Products::class, 'orderDetail', 'orderID', 'productID')
+                    ->withPivot('quantity','totalPrice');
+    }
 
     protected $casts = [
         'created_at' => 'datetime',

@@ -23,7 +23,23 @@ class Products extends Model
 
     public function cart()
     {
-        return $this->belongsTo(Cart::class, 'id', 'productID'); // Adjust the foreign key as needed
+        return $this->belongsTo(Cart::class, 'cartID', 'id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Categories::class, 'categoryID','id');
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Orders::class, 'orderDetail', 'productID', 'orderID')
+                    ->withPivot('quantity','totalPrice');
+    }
+
+    public function rating()
+    {
+        return $this->hasMany(Rating::class, 'productID', 'id');
     }
 
     protected $casts = [

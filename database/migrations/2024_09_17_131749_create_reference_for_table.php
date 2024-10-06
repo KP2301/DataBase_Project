@@ -22,19 +22,19 @@ return new class extends Migration
 
         Schema::table('orders', function (Blueprint $table) {
             $table->foreign('customerID')->references('id')->on('customers')->onDelete('set null');
-            $table->foreign('productID')->references('id')->on('products')->onDelete('set null');
         });
 
         Schema::table('rating', function (Blueprint $table) {
-            $table->foreign('customerID')->references('id')->on('customers')->onDelete('set null');
-            $table->foreign('productID')->references('id')->on('products')->onDelete('set null');
-            $table->foreign('orderID')->references('id')->on('orders')->onDelete('set null');
+            $table->foreign('customerID')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('productID')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('orderID')->references('id')->on('orders')->onDelete('cascade');
         });
 
-        Schema::table('orderDetail', function (Blueprint $table) {
-            $table->foreign('productID')->references('id')->on('products')->onDelete('set null');
-            $table->foreign('orderID')->references('id')->on('orders')->onDelete('set null');
-        });
+        // Schema::table('orderDetail', function (Blueprint $table) {
+        //     $table->foreign('productID')->references('id')->on('products')->onDelete('cascade');
+        //     $table->foreign('orderID')->references('id')->on('orders')->onDelete('cascade');
+        // });
+        
     }
 
     /**

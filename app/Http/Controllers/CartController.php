@@ -18,10 +18,13 @@ class CartController extends Controller
          // Retrieve cart items for the authenticated user
          $cartItems = Cart::where('customerID', $userId)->get();
 
-         $products = DB::table('carts')
-         ->join('products','products.id','=','carts.productID')
-         ->where('customerID',$userId)
-         ->get();
+        //  $cartproducts = DB::table('carts')
+        //  ->join('products','products.id','=','carts.productID')
+        //  ->where('customerID',$userId)
+        //  ->get();
+        $cartproducts = Cart::where('customerID', $userId)
+        ->with('product')
+        ->get();
          
          $subtotal = $cartItems->sum('totalPrice');
          
@@ -32,7 +35,7 @@ class CartController extends Controller
          $total = $subtotal + $shipping;
  
          // Pass the data to the view
-         return view('cart.display_cart', compact('subtotal', 'shipping', 'total','products'));
+         return view('cart.display_cart', compact('subtotal', 'shipping', 'total','cartproducts'));
     }
 
     public function addToCart(Request $request)

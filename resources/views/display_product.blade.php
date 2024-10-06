@@ -36,11 +36,16 @@
                         <div class="p-4">
                             <h2 class="text-lg font-semibold">{{ $product->name }}</h2>
                             <p class="text-gray-700">${{ number_format($product->price, 2) }}</p>
-                            
+                            <!-- Display star rating -->
+                            @if($product->rating->isNotEmpty())
+                                <p>Rating: {{ number_format($product->rating->avg('star')) }} / 5</p>
+                            @else
+                                <p>No ratings yet</p>
+                            @endif
                             @auth
                                 <p class="text-gray-500">Remaining Stock: {{ $product->remainProduct }}</p> 
                                 <!-- Details Button -->
-                                <button class="mt-2 text-white-500 hover:underline" onclick="openModal('{{ $product->id }}', '{{ $product->name }}', '{{ $product->description }}', '{{ number_format($product->price, 2) }}', '{{ $product->remainProduct }}')">
+                                <button class="mt-2 text-white-500 hover:underline" onclick="openModal('{{ $product->id }}', '{{ $product->name }}', '{{ $product->description }}', '{{ number_format($product->price, 2) }}', '{{ $product->remainProduct }}', '{{ $product->category->name }}')">
                                     View Details
                                 </button>
                             @else
@@ -63,6 +68,7 @@
             <div class="bg-white rounded-lg p-6 max-w-md mx-auto">
                 <h2 class="text-lg font-semibold" id="modalProductName"></h2>
                 <p id="modalProductDescription"></p>
+                <p id="modalProductCategory"></p>
                 <p class="mt-2" id="modalProductPrice"></p>
                 <p class="mt-2" id="modalProductStock"></p>
                 <form id="modalAddToCartForm" action="{{ route('addToCart') }}" method="POST" class="mt-4" onsubmit="return validateStock()">
@@ -80,7 +86,7 @@
         </div>
 
         <script>
-            function openModal(productId, name, description, price, stock) {
+            function openModal(productId, name, description, price, stock,cat) {
                 document.getElementById('modalProductName').innerText = name;
                 document.getElementById('modalProductDescription').innerText = description;
                 document.getElementById('modalProductPrice').innerText = `$${price}`;
@@ -88,8 +94,10 @@
                 document.getElementById('modalProductID').value = productId; 
                 document.getElementById('productModal').classList.remove('hidden');
                 document.getElementById('productModal').setAttribute('aria-hidden', 'false');
+                document.getElementById('modalProductCategory').innerText = cat;
                 document.getElementById('modalTotalAmount').value = 1; 
                 document.getElementById('modalTotalAmount').focus();
+                
             }
 
             function closeModal() {

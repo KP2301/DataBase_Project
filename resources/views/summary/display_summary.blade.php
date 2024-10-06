@@ -12,18 +12,19 @@
                     <p>No purchased product found.</p>
                     @else
                     @foreach ($Items as $item)
-                    <div class="flex flex-row mb-4 p-4 border rounded">
-                        <div class="h-48 mb-3 mr-5 lg:h-auto lg:w-48 flex-none bg-cover text-center overflow-hidden">
-                            <img src="{{ $item->product_photo }}" alt="{{ $item->name }}" class="h-full w-full object-cover">
+                        @foreach ($item->products as $product)
+                        <div class="flex flex-row mb-4 p-4 border rounded">
+                            <div class="h-48 mb-3 mr-5 lg:h-auto lg:w-48 flex-none bg-cover text-center overflow-hidden">
+                                <img src="{{ $product->product_photo }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
+                            </div>
+                            <div>
+                                <p>{{ __('Product : ') }}{{ $product->name }}</p>
+                                <p>{{ __('Total Price : ') }}{{ $product->pivot->totalPrice }}</p>
+                                <p>{{ __('Date and Time : ') }}{{ $item->date_time }}</p>
+                                <p>{{ __('Quantity : ') }}{{ $product->pivot->quantity }}</p>
+                            </div> 
                         </div>
-                        <div>
-                            <p>{{ __('Product : ') }}{{ $item->name }}</p>
-                            <p>{{ __('Total Price : ') }}{{ $item->totalPrice }}</p>
-                            <p>{{ __('Date and Time : ') }}{{ $item->date_time }}</p>
-                            <p>{{ __('Quantity : ') }}{{ $item->quantity }}</p>
-                        </div>
-                        
-                    </div>
+                        @endforeach
                     @endforeach
                     @endif
                 </div>

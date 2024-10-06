@@ -15,9 +15,15 @@ class Cart extends Model
         'productID',
     ];
 
-    public function products()
+    public function customer()
     {
-        return $this->hasMany(Product::class, 'productID', 'id'); // Adjust the foreign key as needed
+        return $this->belongsTo(User::class, 'customerID', 'id');
+    }
+
+
+    public function product()
+    {
+        return $this->hasMany(Products::class,'id','productID'); // Adjust the foreign key as needed
     }
 
     protected $casts = [

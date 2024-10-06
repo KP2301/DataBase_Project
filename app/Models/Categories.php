@@ -12,6 +12,11 @@ class Categories extends Model
         'name',
     ];
 
+    public function products()
+    {
+        return $this->hasMany(Products::class, 'categoryID', 'id'); 
+    }
+
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

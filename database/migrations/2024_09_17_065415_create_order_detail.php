@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('orderDetail', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('productID');
-            $table->unsignedBigInteger('orderID');
-            $table->timestamp('date_time');
+            $table->foreignId('orderID')->nullable()->constrained('orders')->onDelete('set null'); // Foreign key
+            $table->foreignId('productID')->nullable()->constrained('products')->onDelete('set null'); // Foreign key
+            $table->unsignedBigInteger('totalPrice');
+            $table->integer('quantity'); 
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_detail');
+        Schema::dropIfExists('orderDetail');
     }
 };

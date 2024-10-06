@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\Products; 
 use App\Models\Orders;
+use App\Models\orderDetails;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\ContinueRequest; // Include the ContinueRequest
+use App\Http\Requests\ContinueRequest; 
 
 class SummaryController extends Controller
 {
@@ -17,37 +18,39 @@ class SummaryController extends Controller
     {
         // Get the authenticated user's ID
         $userId = Auth::id();
-        $Items = DB::table('orders')
-        ->join('products','products.id','=','orders.productID')
-        ->where('customerID',$userId)
-        ->get();
+        $Items = Orders::where('customerID', $userId)
+                    ->with('products') 
+                    ->get();
         return view('summary.display_summary',compact('Items'));
     }
 
     public function addToOrders(Request $request)
     {
         $request->validate([
-            'terms' => 'accepted', // The 'accepted' rule requires the checkbox to be checked
+            'terms' => 'accepted', 
         ]);
 
         $userId = Auth::id();
-    
-        // Get all cart items for the authenticated user
-        $cartItems = DB::table('carts')
-            ->join('products', 'products.id', '=', 'carts.productID')
-            ->where('customerID', $userId)
-            ->get();
+
+        $cartItems = Cart::where('customerID', $userId)
+        ->with('product') 
+        ->get(); // Use get() to retrieve all items
     
         DB::transaction(function () use ($cartItems, $userId) {
+            // Loop through each cart item and attach to the order
             foreach ($cartItems as $cartItem) {
-                Orders::create([
+                $order = Orders::create([
                     'customerID' => $userId,
-                    'productID' => $cartItem->productID,
-                    'quantity' => $cartItem->totalAmount,
-                    'totalPrice' => $cartItem->totalPrice,
-                    'date_time' => Carbon::now(),
+                    'date_time' => Carbon::now(), 
                 ]);
-            }
+
+                orderDetails::create([ 
+                    'orderID' => $order->id, 
+                    'productID' => $cartItem->productID, 
+                    'quantity' => $cartItem->totalAmount, 
+                    'totalPrice' => $cartItem->totalPrice,
+                ]);
+            }       
             DB::table('carts')->where('customerID', $userId)->delete();
         });
         

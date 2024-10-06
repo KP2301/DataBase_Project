@@ -51,7 +51,8 @@
                         <div class="w-2/3 logo">
                             <h3 class="summary-heading text-lg font-bold mb-4">{{ __('Cart Summary') }}</h3>
 
-                            @foreach ($products as $product)
+                            @foreach ($cartproducts as $cart)
+                                @foreach ($cart->product as $product)
                                 <div class="w-auto lg:flex mb-4 mr-4 border-4 border-black rounded-lg shadow-md p-4 bg-white">
                                     <!-- Product Image -->
                                     <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover text-center overflow-hidden">
@@ -60,29 +61,29 @@
                                     
                                     <!-- Product Info -->
                                     <div class="ml-4 flex flex-col justify-between leading-normal">
-                                    <div class="mb-2">
-                                        <p class="text-gray-900 font-bold text-xl">{{ $product->name }}</p>
-                                        <p class="text-gray-600">{{ __('Quantity:') }} {{ $product->totalAmount }}</p> 
-                                        <p class="text-gray-600">{{ __('Price:') }} ${{ $product->price }}</p>
+                                        <div class="mb-2">
+                                            <p class="text-gray-900 font-bold text-xl">{{ $product->name }}</p>
+                                            <p class="text-gray-600">{{ __('Quantity:') }} {{ $cart->totalAmount }}</p> 
+                                            <p class="text-gray-600">{{ __('Price:') }} ${{ $product->price }}</p>
+                                        </div>
+                                        <form method="POST" action="{{ route('deleteFromCart') }}">
+                                            @csrf
+                                            <!-- Hidden input to pass productID to the delete method -->
+                                            <input type="hidden" name="productID" value="{{ $product->id }}">
+                                            
+                                            <!-- Input to specify quantity to delete -->
+                                            <label for="quantity" class="text-black">{{ __('Quantity to delete:') }}</label>
+                                            <input type="number" name="quantity" value="1" min="1" max="{{ $cart->totalAmount }}" class="text-black">
+
+                                            <!-- Delete button -->
+                                            <button type="submit" class="text-blue-500 hover:underline">
+                                                {{ __('Delete') }}
+                                            </button>
+                                        </form>
+
                                     </div>
-                                    <form method="POST" action="{{ route('deleteFromCart') }}">
-                                        @csrf
-                                        <!-- Hidden input to pass productID to the delete method -->
-                                        <input type="hidden" name="productID" value="{{ $product->id }}">
-                                        
-                                        <!-- Input to specify quantity to delete -->
-                                        <label for="quantity">{{ __('Quantity to delete:') }}</label>
-                                        <input type="number" name="quantity" value="1" min="1" max="{{ $product->totalAmount }}" class="text-black">
-
-                                        <!-- Delete button -->
-                                        <button type="submit" class="text-blue-500 hover:underline">
-                                            {{ __('Delete') }}
-                                        </button>
-                                    </form>
-
                                 </div>
-
-                                </div>
+                                @endforeach
                             @endforeach
 
                         </div>

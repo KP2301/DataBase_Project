@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rating extends Model
 {
     use HasFactory;
+    protected $table = 'rating';
 
     protected $fillable = [
         'star',
@@ -15,6 +16,17 @@ class Rating extends Model
         'productID',
         'orderID',
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Products::class, 'productID', 'id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'customerID', 'id');
+    }
+
 
     protected $casts = [
         'created_at' => 'datetime',
