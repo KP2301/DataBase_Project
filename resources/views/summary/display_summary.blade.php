@@ -31,26 +31,46 @@
                                         <img src="{{ $product->product_photo }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
                                     </div>
 
-                                    <div>
+                                    <div> <!-- Order detail -->
                                         <div class ="flex flex-col">
-                                            <p>{{ __('OrderID : ')}}{{ $product->pivot->orderID}}</p>
-                                            <p>{{ __('Product : ') }}{{ $product->name }}</p>
-                                            <p>{{ __('Total Price : ') }}{{ $product->pivot->totalPrice }}</p>
-                                            <p>{{ __('Date and Time : ') }}{{ $item->date_time }}</p>
-                                            <p>{{ __('Quantity : ') }}{{ $product->pivot->quantity }}</p>
-                                        </div>
-                                        
-                                        
-                                        
+                                            <!-- <p class = "py-2">{{ __('OrderID : ')}}{{ $product->pivot->orderID}}</p> -->
+                                            <p class = "pt-2">{{ __('Product : ') }}{{ $product->name }}</p>
+                                            <p class = "pt-2">{{ __('Total Price : ') }}{{ $product->pivot->totalPrice }}</p>
+                                            <p class = "pt-2">{{ __('Date and Time : ') }}{{ $item->date_time }}</p>
+                                            <p class = "pt-2">{{ __('Quantity : ') }}{{ $product->pivot->quantity }}</p>
 
+                                            <div class = "flex py-5">
+                                                @php
+                                                    $ratingByOrder = $product->rating->where('orderID', $product->pivot->orderID)->first();
+                                                @endphp
+
+                                                @if ($ratingByOrder)
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @if ($i <= $ratingByOrder->star)
+                                                            <i class="flex fas fa-star text-yellow-400 text-2xl"></i><!-- Filled Star -->
+                                                        @else
+                                                            <i class="far fa-star text-yellow-400 text-2xl"></i> <!-- Empty Star -->
+                                                        @endif
+                                                    @endfor
+                                                @else
+                                                    <p class="text-gray-500 text-xl">You haven't rated this product of this order yet.</p>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div class="ms-auto flex-col flex"> <!-- rate product part -->
+                                    <div class="ms-auto flex-col flex">
                                         <div>
                                             <x-dropdown align="right" width="48" contentClasses="py-2 bg-white dark:bg-gray-800">
                                                 <x-slot:trigger>
-                                                    <button class="bg-blue-500 text-white px-4 py-2 rounded">
-                                                        Rate the product.
+                                                    <button class="bg-blue-500 text-white px-4 py-2 rounded" aria-label="Rate the product">
+                                                        
+                                                        @if($ratingByOrder)
+                                                            Edit your rate.
+                                                        @else
+                                                            Rate the product.
+                                                        @endif
+
                                                     </button>
                                                 </x-slot:trigger>
 
@@ -58,31 +78,29 @@
                                                     @for ($i = 1; $i <= 5; $i++)
                                                         <a href="#" class="block px-4 py-2 text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-600"
                                                             @click.prevent="selected = '{{ $i }}'">
-                                                                {{ $i }} star{{ $i > 1 ? 's' : '' }}
+                                                            {{ $i }} star{{ $i > 1 ? 's' : '' }}
                                                         </a>
                                                     @endfor
                                                 </x-slot:content>
                                             </x-dropdown>
-                                            <div>
+                                            <!-- <div class="mt-2"> 
                                                 <p class="mt-4">Selected Rating: <span x-text="selected"></span></p>
-                                            </div>
+                                            </div> -->
                                         </div>
-
                                         <div class="flex mt-auto ms-auto" x-show="selected" x-transition>
-                                            <form method="POST" action="{{ route('product.rate')}}">
+                                            <form method="POST" action="{{ route('product.rate') }}">
                                                 @csrf
-                                                <input type="hidden" name="productID" :value="'{{ $product->id }}'">
+                                                <input type="hidden" name="productID" value="{{ $product->id }}">
                                                 <input type="hidden" name="rating" x-model="selected">
-                                                <input type="hidden" name="orderID" :value="'{{ $product->pivot->orderID }}'">
+                                                <input type="hidden" name="orderID" value="{{ $product->pivot->orderID }}">
                                                 
-                                                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">
+                                                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded" aria-label="Submit rating">
                                                     Submit
                                                 </button>
                                             </form>
                                         </div>
-
-                                        
-                                    </div>    
+                                    </div>
+  
                                 </div>
                                 
                         @endforeach

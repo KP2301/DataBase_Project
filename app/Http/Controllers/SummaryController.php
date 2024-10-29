@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Products; 
 use App\Models\Orders;
 use App\Models\orderDetails;
+use App\Models\Rating;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ContinueRequest; 
@@ -20,6 +21,7 @@ class SummaryController extends Controller
         $userId = Auth::id();
         $Items = Orders::where('customerID', $userId)
                     ->with('products') 
+                    ->with('rating')
                     ->get();
         return view('summary.display_summary',compact('Items'));
     }

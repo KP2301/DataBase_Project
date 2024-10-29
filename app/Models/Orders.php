@@ -20,6 +20,10 @@ class Orders extends Model
                     ->withPivot('quantity','totalPrice');
     }
 
+    public function rating() {
+        return $this->hasOne(Rating::class, 'orderID');
+    }
+
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

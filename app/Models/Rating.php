@@ -27,6 +27,10 @@ class Rating extends Model
         return $this->belongsTo(User::class, 'customerID', 'id');
     }
 
+    public function orders() {
+        return $this->belongsTo(Orders::class);
+    }
+
 
     protected $casts = [
         'created_at' => 'datetime',
