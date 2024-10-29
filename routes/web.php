@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('addToCart');
     Route::post('/add-to-orders', [SummaryController::class, 'addToOrders'])->name('addToOrders');
     Route::post('/delete-from-cart', [CartController::class, 'deleteFromCart'])->name('deleteFromCart');
+    Route::post('/rate-product', [ProductController::class, 'rateProduct'])->name('product.rate');
 
 });
 
