@@ -50,6 +50,10 @@ class ProductController extends Controller
             $message = 'Product rated successfully!';
         }
 
+        $product = Products::find($request->productID);
+        $product->Rate_star = number_format($product->rating->avg('star'));
+        $product->save();
+
         return redirect()->back()->with('success', $message);
     }
 }

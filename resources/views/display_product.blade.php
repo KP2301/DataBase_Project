@@ -15,16 +15,6 @@
                 </span>
             </div>
         @endif
-
-        @if(session('error'))
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                <strong class="font-bold">Error!</strong>
-                <span class="block sm:inline">{{ session('error') }}</span>
-                <span class="absolute top-0 bottom-0 right-0 px-4 py-3" onclick="this.parentElement.style.display='none';">
-                    <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 00-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 101.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z"/></svg>
-                </span>
-            </div>
-        @endif
         
         <div class="flex flex-wrap justify-around m-6 text-black">
             @if ($products->isEmpty())
@@ -38,7 +28,7 @@
                             <p class="text-gray-700">${{ number_format($product->price, 2) }}</p>
                             <!-- Display star rating -->
                             @if($product->rating->isNotEmpty())
-                                <p>Rating: {{ number_format($product->rating->avg('star')) }} / 5</p>
+                                <p>Rating: {{ $product->Rate_star }} / 5</p>
                             @else
                                 <p>No ratings yet</p>
                             @endif

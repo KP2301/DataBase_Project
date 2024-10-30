@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('remainProduct');
             $table->unsignedBigInteger('Rate_star')->nullable();
             $table->string("description")->nullable();
-            $table->unsignedBigInteger('cartID')->nullable();
             $table->unsignedBigInteger('categoryID')->nullable();
             $table->string('product_photo')->nullable();
             $table->timestamps();

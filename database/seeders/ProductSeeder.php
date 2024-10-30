@@ -21,7 +21,6 @@ class ProductSeeder extends Seeder
                 'description' => 'A timeless white shirt made from premium cotton.',
                 'categoryID' => 1,
                 'remainProduct' => 5,
-                'Rate_star' => 5,
                 'product_photo' => 'pictures/demo-shirt1.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -32,7 +31,6 @@ class ProductSeeder extends Seeder
                 'description' => 'A rugged denim shirt, perfect for casual wear.',
                 'categortID' => 4,
                 'remainProduct' => 5,
-                'Rate_star' => 5,
                 'product_photo' => 'pictures/demo-shirt2.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -43,7 +41,6 @@ class ProductSeeder extends Seeder
                 'description' => 'A modern black shirt with a slim fit design.',
                 'categortID' => 5,
                 'remainProduct' => 5,
-                'Rate_star' => 5,
                 'product_photo' => 'pictures/demo-shirt3.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -54,7 +51,6 @@ class ProductSeeder extends Seeder
                 'description' => 'A vibrant floral shirt, ideal for summer outings.',
                 'categortID' => 3,
                 'remainProduct' => 5,
-                'Rate_star' => 5,
                 'product_photo' => 'pictures/demo-shirt1.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -65,7 +61,6 @@ class ProductSeeder extends Seeder
                 'description' => 'A classic checked shirt for everyday comfort.',
                 'categortID' => 1,
                 'remainProduct' => 5,
-                'Rate_star' => 5,
                 'product_photo' => 'pictures/demo-shirt1.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -76,7 +71,6 @@ class ProductSeeder extends Seeder
                 'description' => 'A smart striped shirt perfect for the office.',
                 'categortID' => 6,
                 'remainProduct' => 5,
-                'Rate_star' => 5,
                 'product_photo' => 'pictures/demo-shirt1.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -87,7 +81,6 @@ class ProductSeeder extends Seeder
                 'description' => 'A light and breathable linen shirt, great for casual days.',
                 'categortID' => 1,
                 'remainProduct' => 5,
-                'Rate_star' => 5,
                 'product_photo' => 'pictures/demo-shirt1.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -98,7 +91,6 @@ class ProductSeeder extends Seeder
                 'description' => 'A fun graphic tee for relaxed weekends.',
                 'categortID' => 7,
                 'remainProduct' => 5,
-                'Rate_star' => 5,
                 'product_photo' => 'pictures/demo-shirt1.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -109,7 +101,6 @@ class ProductSeeder extends Seeder
                 'description' => 'A warm plaid flannel shirt for colder weather.',
                 'categortID' => 1,
                 'remainProduct' => 5,
-                'Rate_star' => 5,
                 'product_photo' => 'pictures/demo-shirt1.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -120,7 +111,6 @@ class ProductSeeder extends Seeder
                 'description' => 'A comfortable short sleeve polo, perfect for casual or sporty wear.',
                 'categortID' => 2,
                 'remainProduct' => 5,
-                'Rate_star' => 5,
                 'product_photo' => 'pictures/demo-shirt1.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
