@@ -1,54 +1,34 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>DataBase Project</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Aboreto' rel='stylesheet'>
+</head>
+
 <x-app-layout>
+
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl leading-tight summary-heading">
             {{ __('CART') }}
         </h2>
     </x-slot>
-    
-    <style>
-        .logo {
-            font-family: 'Times New Roman', serif;
-            font-size: 24px;
-            letter-spacing: 5px;
-            font-weight: bold;
-            transition: color 0.3s ease; /* Smooth transition for color change */
-        }
 
-        /* Light mode styles */
-        @media (prefers-color-scheme: light) {
-            .logo {
-                font-family: 'Times New Roman', serif;
-                color: black; /* Dark text for light mode */
-            }
-            
-            .summary-heading {
-                color: black; /* Dark text for light mode */
-            }
-        }
-
-        /* Dark mode styles */
-        @media (prefers-color-scheme: dark) {
-            .logo {
-                font-family: 'Times New Roman', serif;
-                color: white; /* White text for dark mode */
-            }
-            
-            .summary-heading {
-                color: white; /* White text for dark mode */
-            }
-        }
-    </style>
-                
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    
-                    <!-- {{-- Order Summary --}} -->
+
+                    <!-- Order Summary -->
                     <div class="flex justify-between">
-                        
-                        <!-- {{-- Left: Order Details --}} -->
-                        <div class="w-2/3 logo">
+                        <!-- Left: Order Details -->
+                        <div class="w-2/3 ">
                             <h3 class="summary-heading text-lg font-bold mb-4">{{ __('Cart Summary') }}</h3>
 
                             @foreach ($cartproducts as $cart)
@@ -58,19 +38,19 @@
                                     <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover text-center overflow-hidden">
                                         <img src="{{ $product->product_photo }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
                                     </div>
-                                    
+
                                     <!-- Product Info -->
                                     <div class="ml-4 flex flex-col justify-between leading-normal">
                                         <div class="mb-2">
                                             <p class="text-gray-900 font-bold text-xl">{{ $product->name }}</p>
-                                            <p class="text-gray-600">{{ __('Quantity:') }} {{ $cart->totalAmount }}</p> 
+                                            <p class="text-gray-600">{{ __('Quantity:') }} {{ $cart->totalAmount }}</p>
                                             <p class="text-gray-600">{{ __('Price:') }} ${{ $product->price }}</p>
                                         </div>
                                         <form method="POST" action="{{ route('deleteFromCart') }}">
                                             @csrf
                                             <!-- Hidden input to pass productID to the delete method -->
                                             <input type="hidden" name="productID" value="{{ $product->id }}">
-                                            
+
                                             <!-- Input to specify quantity to delete -->
                                             <label for="quantity" class="text-black">{{ __('Quantity to delete:') }}</label>
                                             <input type="number" name="quantity" value="1" min="1" max="{{ $cart->totalAmount }}" class="text-black">
@@ -87,36 +67,36 @@
                             @endforeach
 
                         </div>
-                        <!-- {{-- Right: Summary Totals --}} -->
-                        <div class="w-1/3 bg-gray-100 p-4 rounded-lg shadow logo ">
-                            <div class="text-black dark:text-black text-lg  mb-4 ">{{ __('Order Summary') }}</div>
-                                <div class="text-sm flex justify-between mb-2 text-black dark:text-black">
-                                    <span>{{ __('Subtotal') }}</span>
-                                    <span>${{ $subtotal }}</span>
+                        <!-- Right: Summary Totals -->
+                        <div class="w-1/3 bg-gray-100 p-4 rounded-lg shadow  ">
+                            <div class="text-black bg-transparent dark:text-black text-lg mb-4">{{ __('Order Summary') }}</div>
+                                <div class="bg-transparent text-sm flex justify-between mb-2 text-black dark:text-black">
+                                    <span class="bg-transparent">{{ __('Subtotal') }}</span>
+                                    <span class="bg-transparent">${{ $subtotal }}</span>
                                 </div>
-                                <div class="text-sm flex justify-between mb-2 text-black dark:text-black">
-                                    <span>{{ __('Shipping') }}</span>
-                                    <span>${{ $shipping }}</span>
+                                <div class="bg-transparent text-sm flex justify-between mb-2 text-black dark:text-black">
+                                    <span class="bg-transparent">{{ __('Shipping') }}</span>
+                                    <span class="bg-transparent">${{ $shipping }}</span>
                                 </div>
-                                <div class="text-sm flex justify-between  text-black dark:text-black">
-                                    <span>{{ __('Total (Tax Incl.)') }}</span>
-                                    <span>${{ $total }}</span>
-                                </div>                                    
+                                <div class="bg-transparent text-sm flex justify-between text-black dark:text-black">
+                                    <span class="bg-transparent">{{ __('Total (Tax Incl.)') }}</span>
+                                    <span class="bg-transparent">${{ $total }}</span>
+                                </div>
                         <!-- Terms and Conditions -->
                         <form method="POST" action="{{ route('addToOrders') }}">
-                            @csrf~
-                            <label class="flex items-center">
-                                <input type="checkbox" name="terms" class="form-checkbox">
-                                <span class="ml-2 text-black dark:text-black ">{{ __('I agree to the terms and conditions') }}</span>    
+                            @csrf
+                            <label class="flex items-center bg-transparent ">
+                                <input type="checkbox" name="terms" class="form-checkbox ">
+                                <span class="bg-transparent ml-2 text-black dark:text-black ">{{ __('I agree to the terms and conditions') }}</span>
                             </label>
 
                             <!-- Continue Button -->
                             <button type="submit" class="mt-4 w-full bg-gray-800 text-white p-2 rounded-lg hover:bg-gray-700">
                                 {{ __('Continue') }}
                             </button>
-                        </form> 
+                        </form>
                     </div>
-                                    
+
                     <div class="p-5">
                     <!-- Success and Error Alerts -->
                     @if(session('success') || session('error'))
@@ -169,3 +149,33 @@
     </div>
 </x-app-layout>
 
+<style>
+    
+    .logo {
+        font-family: "Aboreto"; 
+        font-size: 2rem;
+        letter-spacing: 1px;
+        font-weight: bold;
+        transition: color 0.3s ease; /* Smooth transition for color change */
+    }
+
+    /* Apply Aboreto font to summary heading */
+    .summary-heading {
+        font-family: "Aboreto"; 
+        font-weight: bold;
+    }
+
+    /* Light mode styles */
+    @media (prefers-color-scheme: light) {
+        .logo, .summary-heading {
+            color: black; /* Dark text for light mode */
+        }
+    }
+
+    /* Dark mode styles */
+    @media (prefers-color-scheme: dark) {
+        .logo, .summary-heading {
+            color: white; /* White text for dark mode */
+        }
+    }
+</style>

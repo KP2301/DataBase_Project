@@ -21,12 +21,14 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center justify-start">
                     <a href="{{ route('/') }}" style="text-decoration: none">
-                        <div class="logo">BAOBAO</div>
+                        <div class="logo"> BAOBAO</div>
                     </a>
                 </div>
 
                 <style>
-                
+                    *{
+                        background : #FFFCF8;
+                    }
                     .logo {
                         font-family:"Aboreto"; 
                         font-size: 2rem;
@@ -39,6 +41,7 @@
                     @media (prefers-color-scheme: light) {
                         .logo {
                             color: black; /* Dark text for light mode */
+                            
                         }
                     }
 
