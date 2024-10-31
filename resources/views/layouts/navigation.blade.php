@@ -5,20 +5,26 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center justify-start">
-                    <a href="{{ route('/') }}">
+                    <a href="{{ route('/') }}" style="text-decoration: none">
                         <div class="logo">BAOBAO</div>
                     </a>
                 </div>
 
                 <style>
-                    .logo {
+                    /* .logo {
                         font-family: 'Times New Roman', serif;
                         font-size: 24px;
                         letter-spacing: 5px;
                         font-weight: bold;
                         transition: color 0.3s ease; /* Smooth transition for color change */
+                    /* } */
+                    .logo {
+                        font-family: "Aboreto"; 
+                        font-size: 2rem;
+                        letter-spacing: 1px;
+                        font-weight: bold;
+                        transition: color 0.3s ease; /* Smooth transition for color change */
                     }
-
                     /* Light mode styles */
                     @media (prefers-color-scheme: light) {
                         .logo {
