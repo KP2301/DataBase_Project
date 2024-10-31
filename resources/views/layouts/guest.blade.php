@@ -32,7 +32,9 @@
                 background : #FFFCF8;
             }
             body {
-                height: 100vh; /* Set height to full viewport height */
+                margin: 0;
+                padding: 0;
             }
+
         </style>
 </html>
