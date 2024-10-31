@@ -37,6 +37,9 @@
             </main>
         </div>
         <style>
+            *{
+                background : #FFFCF8;
+            }
             body {
                 height: 100vh; /* Set height to full viewport height */
             }
