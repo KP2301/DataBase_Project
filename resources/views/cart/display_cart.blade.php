@@ -20,16 +20,16 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-12" >
+        <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8" >
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                     <!-- Order Summary -->
-                    <div class="flex justify-between">
+                    <div class="flex justify-between" >
                         <!-- Left: Order Details -->
-                        <div class="w-2/3 ">
-                            <h3 class="summary-heading text-lg font-bold mb-4">{{ __('Cart Summary') }}</h3>
+                        <div class="w-2/3" >
+                            <h3 class="summary-heading text-lg font-bold mb-4" >{{ __('Cart Summary') }}</h3>
 
                             @foreach ($cartproducts as $cart)
                                 @foreach ($cart->product as $product)
@@ -68,26 +68,34 @@
 
                         </div>
                         <!-- Right: Summary Totals -->
-                        <div class="w-1/3 bg-gray-100 p-4 rounded-lg shadow  ">
+                        <div class="w-1/3 bg-gray-100 p-4 rounded-lg shadow " >
                             <div class="text-black bg-transparent dark:text-black text-lg mb-4">{{ __('Order Summary') }}</div>
                                 <div class="bg-transparent text-sm flex justify-between mb-2 text-black dark:text-black">
                                     <span class="bg-transparent">{{ __('Subtotal') }}</span>
                                     <span class="bg-transparent">${{ $subtotal }}</span>
                                 </div>
-                                <div class="bg-transparent text-sm flex justify-between mb-2 text-black dark:text-black">
+                                
+      
+                                <div class="bg-transparent text-sm flex justify-between mb-2 text-black dark:text-black ">
                                     <span class="bg-transparent">{{ __('Shipping') }}</span>
                                     <span class="bg-transparent">${{ $shipping }}</span>
                                 </div>
-                                <div class="bg-transparent text-sm flex justify-between text-black dark:text-black">
+
+                                <div class="border-b border-gray-400">
+                                </div>
+                                <br>
+
+                                <div class="bg-transparent text-med flex justify-between text-black dark:text-black">
                                     <span class="bg-transparent">{{ __('Total (Tax Incl.)') }}</span>
                                     <span class="bg-transparent">${{ $total }}</span>
                                 </div>
+                                <br>
                         <!-- Terms and Conditions -->
-                        <form method="POST" action="{{ route('addToOrders') }}">
+                        <form class="bg-transparent" method="POST" action="{{ route('addToOrders') }}">
                             @csrf
                             <label class="flex items-center bg-transparent ">
-                                <input type="checkbox" name="terms" class="form-checkbox ">
-                                <span class="bg-transparent ml-2 text-black dark:text-black ">{{ __('I agree to the terms and conditions') }}</span>
+                                <input type="checkbox" name="terms" class="form-checkbox">
+                                <span class="bg-transparent text-sm text-black dark:text-black ml-2">{{ __(' I agree to the terms and conditions') }}</span> <!-- Added margin-left to text -->
                             </label>
 
                             <!-- Continue Button -->
@@ -150,7 +158,14 @@
 </x-app-layout>
 
 <style>
-    
+    *{
+        font-family: "Aboreto";
+    }
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
     .logo {
         font-family: "Aboreto"; 
         font-size: 2rem;

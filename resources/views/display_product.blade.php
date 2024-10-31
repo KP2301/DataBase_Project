@@ -30,10 +30,10 @@
                             @if($product->rating->isNotEmpty())
                                 <p>Rating: {{ $product->Rate_star }} / 5</p>
                             @else
-                                <p>No ratings yet</p>
+                                <p>No rating yet</p>
                             @endif
                             @auth
-                                <p class="text-gray-500">Remaining Stock: {{ $product->remainProduct }}</p> 
+                                <p class="text-gray-500">Stock: {{ $product->remainProduct }}</p> 
                                 <!-- Details Button -->
                                 <button class="mt-2 text-white-500 hover:underline" onclick="openModal('{{ $product->id }}', '{{ $product->name }}', '{{ $product->description }}', '{{ number_format($product->price, 2) }}', '{{ $product->remainProduct }}', '{{ $product->category->name }}')">
                                     View Details
@@ -56,20 +56,20 @@
         <!-- Modal Structure -->
         <div id="productModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden z-50 justify-center items-center" aria-hidden="true">
             <div class="bg-white rounded-lg p-6 max-w-md mx-auto">
-                <h2 class="text-lg font-semibold" id="modalProductName"></h2>
-                <p id="modalProductDescription"></p>
-                <p id="modalProductCategory"></p>
-                <p class="mt-2" id="modalProductPrice"></p>
-                <p class="mt-2" id="modalProductStock"></p>
-                <form id="modalAddToCartForm" action="{{ route('addToCart') }}" method="POST" class="mt-4" onsubmit="return validateStock()">
+                <h2 class="text-lg font-semibold bg-transparent" id="modalProductName"></h2>
+                <p class="bg-transparent" id="modalProductDescription"></p>
+                <p class="bg-transparent" id="modalProductCategory"></p>
+                <p class="mt-2 bg-transparent" id="modalProductPrice"></p>
+                <p class="mt-2 bg-transparent" id="modalProductStock"></p>
+                <form class="bg-transparent" id="modalAddToCartForm" action="{{ route('addToCart') }}" method="POST" class="mt-4" onsubmit="return validateStock()">
                     @csrf
-                    <input type="hidden" name="productID" id="modalProductID">
-                    <input type="number" name="totalAmount" id="modalTotalAmount" value="1" min="1" required class="border rounded-md p-1 w-full mt-2">
-                    <button type="submit" class="mt-2 bg-blue-500 text-white py-2 px-4 rounded w-full">
+                    <input class="bg-transparent" type="hidden" name="productID" id="modalProductID">
+                    <input class="bg-transparent" type="number" name="totalAmount" id="modalTotalAmount" value="1" min="1" required class="border rounded-md p-1 w-full mt-2">
+                    <button type="submit" style="color: #776B5D" class="mt-2 text-white py-2 px-4 rounded w-full">
                         Add to Cart
                     </button>
                 </form>
-                <button class="mt-4 bg-red-500 text-white py-2 px-4 rounded" onclick="closeModal()">
+                <button style="color: #776B5D" class="mt-4 text-white py-2 px-4 rounded" onclick="closeModal()">
                     Close
                 </button>
             </div>
