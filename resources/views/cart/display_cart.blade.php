@@ -104,7 +104,7 @@
                                 </div>                                    
                         <!-- Terms and Conditions -->
                         <form method="POST" action="{{ route('addToOrders') }}">
-                            @csrf
+                            @csrf~
                             <label class="flex items-center">
                                 <input type="checkbox" name="terms" class="form-checkbox">
                                 <span class="ml-2 text-black dark:text-black ">{{ __('I agree to the terms and conditions') }}</span>    
