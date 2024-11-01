@@ -135,6 +135,9 @@
 </x-app-layout>
 
 <style>
+    *{
+        font-family: "Aboreto";
+    }
 
     .card {
         width: calc(22.333% - 10px);

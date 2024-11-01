@@ -112,3 +112,9 @@
         </div>
     </div>
 </x-app-layout>
+
+<style>
+    *{
+        font-family: "Aboreto";
+    }
+</style>
