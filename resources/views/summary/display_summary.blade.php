@@ -63,7 +63,7 @@
                                         <div>
                                             <x-dropdown align="right" width="48" contentClasses="py-2 bg-white dark:bg-gray-800">
                                                 <x-slot:trigger>
-                                                    <button class="bg-blue-500 text-white px-4 py-2 rounded" aria-label="Rate the product">
+                                                    <button style="background-color:#776B5D ;"  class=" text-white px-4 py-2 rounded" aria-label="Rate the product">
                                                         
                                                         @if($ratingByOrder)
                                                             Edit your rate.
@@ -94,7 +94,7 @@
                                                 <input type="hidden" name="rating" x-model="selected">
                                                 <input type="hidden" name="orderID" value="{{ $product->pivot->orderID }}">
                                                 
-                                                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded" aria-label="Submit rating">
+                                                <button style="background-color:#776B5D ;" type="submit" class=" text-white px-4 py-2 rounded" aria-label="Submit rating">
                                                     Submit
                                                 </button>
                                             </form>

@@ -40,20 +40,20 @@
                                     </div>
 
                                     <!-- Product Info -->
-                                    <div class="ml-4 flex flex-col justify-between leading-normal">
-                                        <div class="mb-2">
-                                            <p class="text-gray-900 font-bold text-xl">{{ $product->name }}</p>
-                                            <p class="text-gray-600">{{ __('Quantity:') }} {{ $cart->totalAmount }}</p>
-                                            <p class="text-gray-600">{{ __('Price:') }} ${{ $product->price }}</p>
+                                    <div class="ml-4 flex flex-col justify-between leading-normal bg-transparent ">
+                                        <div class="mb-2 bg-transparent  ">
+                                            <p class="bg-transparent  text-gray-900 font-bold text-xl">{{ $product->name }}</p>
+                                            <p class="bg-transparent  text-gray-600">{{ __('Quantity:') }} {{ $cart->totalAmount }}</p>
+                                            <p class="bg-transparent  text-gray-600">{{ __('Price:') }} ${{ $product->price }}</p>
                                         </div>
-                                        <form method="POST" action="{{ route('deleteFromCart') }}">
+                                        <form class="bg-transparent " method="POST" action="{{ route('deleteFromCart') }}">
                                             @csrf
                                             <!-- Hidden input to pass productID to the delete method -->
                                             <input type="hidden" name="productID" value="{{ $product->id }}">
 
                                             <!-- Input to specify quantity to delete -->
-                                            <label for="quantity" class="text-black">{{ __('Quantity to delete:') }}</label>
-                                            <input type="number" name="quantity" value="1" min="1" max="{{ $cart->totalAmount }}" class="text-black">
+                                            <label for="quantity" class="bg-transparent  text-black">{{ __('Quantity to delete:') }}</label>
+                                            <input type="number" name="quantity" value="1" min="1" max="{{ $cart->totalAmount }}" class="text-black bg-transparent border-round">
 
                                             <!-- Delete button -->
                                             <button type="submit" class="text-blue-500 hover:underline">
