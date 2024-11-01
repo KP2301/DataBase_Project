@@ -40,7 +40,7 @@
                     @foreach ($Items as $item)
                         @foreach ($item->products as $product)
                             
-                                <div class="flex flex-row mb-4 p-4 border rounded d-flex"  x-data="{ selected: null }">
+                                <div class="flex flex-row mb-4 p-4 border-2 border-black rounded-lg shadow-md p-4 d-flex"  x-data="{ selected: null }">
                                     <div class="h-48 mb-3 mr-5 lg:h-auto lg:w-48 flex-none bg-cover text-center overflow-hidden">
                                         <img src="{{ $product->product_photo }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
                                     </div>

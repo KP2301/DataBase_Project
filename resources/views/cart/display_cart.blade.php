@@ -33,7 +33,7 @@
 
                             @foreach ($cartproducts as $cart)
                                 @foreach ($cart->product as $product)
-                                <div class="w-auto lg:flex mb-4 mr-4 border-4 border-black rounded-lg shadow-md p-4 bg-white">
+                                <div class="w-auto lg:flex mb-4 mr-4 border-2 border-black rounded-lg shadow-md p-4 bg-white">
                                     <!-- Product Image -->
                                     <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover text-center overflow-hidden">
                                         <img src="{{ $product->product_photo }}" alt="{{ $product->name }}" class="h-full w-full object-cover">
@@ -68,7 +68,7 @@
 
                         </div>
                         <!-- Right: Summary Totals -->
-                        <div class="w-1/3 bg-gray-100 p-4 rounded-lg shadow " >
+                        <div class="w-1/3 bg-gray-100 p-4  rounded-lg shadow " >
                             <div class="text-black bg-transparent dark:text-black text-lg mb-4">{{ __('Order Summary') }}</div>
                                 <div class="bg-transparent text-sm flex justify-between mb-2 text-black dark:text-black">
                                     <span class="bg-transparent">{{ __('Subtotal') }}</span>
