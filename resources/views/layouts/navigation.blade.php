@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>DataBase Project</title>
+        <title>BAOBAO</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -31,7 +31,7 @@
                                 <!-- Product Links -->
                                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                     <x-nav-link :href="route('display_product')" :active="request()->routeIs('display_product')" style="text-decoration: none">
-                                        {{ __('Product') }}
+                                        {{ __('Products') }}
                                     </x-nav-link>
                                 </div>
                                 
@@ -47,7 +47,7 @@
                                 <!-- Summary Links -->
                                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                     <x-nav-link :href="route('summary.display_summary')" :active="request()->routeIs('summary.display_summary')" style="text-decoration: none">
-                                        {{ __('Summary') }}
+                                        {{ __('History') }}
                                     </x-nav-link>
                                 </div>
 

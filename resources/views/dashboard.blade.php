@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>DataBase Project O_O BAOBAO </title>
+        <title>BAOBAO </title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

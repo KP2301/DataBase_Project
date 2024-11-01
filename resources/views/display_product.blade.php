@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>DataBase Project</title>
+    <title>BAOBAO</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -70,21 +70,29 @@
         </div>
         <!-- Modal Structure -->
         <div id="productModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 hidden z-50 justify-center items-center" aria-hidden="true">
-            <div class="bg-white rounded-lg p-6 max-w-md mx-auto">
-                <h2 class="text-lg font-semibold bg-transparent" id="modalProductName"></h2>
-                <p class="bg-transparent" id="modalProductDescription"></p>
-                <p class="bg-transparent" id="modalProductCategory"></p>
-                <p class="mt-2 bg-transparent" id="modalProductPrice"></p>
-                <p class="mt-2 bg-transparent" id="modalProductStock"></p>
+            <div class="bg-white rounded-lg p-6 max-w-md mx-auto text-center">
+                <h2 class="text-lg font-semibold bg-transparent" id="modalProductName"></h2> <br>
+                <p class="bg-transparent" id="modalProductDescription"></p><br>
+                <p class="bg-transparent" id="modalProductCategory"></p><br>
+                <p class="mt-2 bg-transparent" id="modalProductPrice"></p><br>
+                <p class="mt-2 bg-transparent" id="modalProductStock"></p><br>
                 <form class="bg-transparent" id="modalAddToCartForm" action="{{ route('addToCart') }}" method="POST" class="mt-4" onsubmit="return validateStock()">
                     @csrf
-                    <input class="bg-transparent" type="hidden" name="productID" id="modalProductID">
+                    <input class="bg-transparent" type="hidden" name="productID" id="modalProductID"><br>
                     <input class="bg-transparent" type="number" name="totalAmount" id="modalTotalAmount" value="1" min="1" required class="border rounded-md p-1 w-full mt-2">
                     <button type="submit" style="color: #776B5D" class="mt-2 text-white py-2 px-4 rounded w-full">
                         Add to Cart
-                    </button>
+                    </button><br>
                 </form>
-                <button style="color: #776B5D" class="mt-4 text-white py-2 px-4 rounded" onclick="closeModal()">
+                <button style="
+                background: #999999;
+                text-align: center;
+                color: #FFFFFF;
+                font-size: 14px;
+                margin-top: 20px; 
+                border-radius: 5px
+                "
+                onclick="closeModal()">
                     Close
                 </button>
             </div>
