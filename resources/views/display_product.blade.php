@@ -1,3 +1,18 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>DataBase Project</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Aboreto' rel='stylesheet'>
+</head>
+
+<body>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -133,9 +148,11 @@
         </div>
     </div>
 </x-app-layout>
-
+</body>
 <style>
-
+    body, h2, p, button, .card, .modal {
+        font-family: 'Aboreto', cursive;
+    }
     .card {
         width: calc(22.333% - 10px);
         height: auto;
@@ -143,20 +160,26 @@
         border: 1px solid #ddd;
         border-radius: 8px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        padding: 10px;
+        padding: 10px; 
         margin-bottom: 15px;
         transition: transform 0.3s;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        text-align: center;
+        text-align: center; 
+        margin-bottom: 1rem; 
+        margin-right: 1rem; 
+        border: 2px solid black; 
+        border-radius: 0.5rem; 
+        box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.1); 
+        padding: 1rem;
     }
 
     .card img {
         width: 100%;
         height: 300px;
-        border-radius: 8px;
+        border-radius: 5px;
         margin-bottom: 4px;
         object-fit:cover;
     }
@@ -167,8 +190,9 @@
 
     /* Add to Cart button styling */
     .add-to-cart {
-        background-color: #8B4513; /* Brown background */
-        color: white; /* White text */
+        /* background-color: #8B4513; Brown background */
+        background-color: #F3EEEA;
+        /* color: white; White text */
         padding: 10px 15px; /* Button padding */
         border: none; /* Remove border */
         border-radius: 5px; /* Rounded button */
@@ -197,3 +221,4 @@
     }
 
 </style>
+</html>
